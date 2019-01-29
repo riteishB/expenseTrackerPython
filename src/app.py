@@ -2,22 +2,30 @@ from flask import Flask
 from flask import request
 import random as rand
 import string
+from schemas import expense_schema
 
 app = Flask(__name__)
 
-@app.route('/')  #GET route
+
+@app.route('/')  # GET route
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello world'
+
 
 @app.route('/', methods=['POST'])
 def postHandler():
-    #content = request.get_json()
-    id = generateID()
-    return id
+    content = request.get_json()
+    if(validateExpenseData(content)):
+        id = generateID()
+        return id, 200
+    else:
+        return 'Invalid Data', 400
+
 
 def generateID():
     return ''.join(rand.choice(string.ascii_uppercase + string.digits) for _ in range(6))
 
 
-
-
+def validateExpenseData(data):
+    isValid = expense_schema.schema.is_valid(data)
+    return isValid
