@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 import random as rand
 import string
+import datetime
 from schemas import expense_schema
 
 app = Flask(__name__)
@@ -14,7 +15,12 @@ def hello_world():
 
 @app.route('/', methods=['POST'])
 def postHandler():
+
     content = request.get_json()
+    #content["creation_date"] = datetime.datetime.now()
+    #content["modified_date"] = datetime.datetime.now()
+    expense_schema.schema.validate(content)
+    
     if(validateExpenseData(content)):
         id = generateID()
         return id, 200
