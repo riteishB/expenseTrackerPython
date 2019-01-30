@@ -3,13 +3,22 @@ from flask import request
 import random as rand
 import string
 import datetime
+#import pymongo
+from pymongo import MongoClient
+import config
 from schemas import expense_schema
 
 app = Flask(__name__)
 
+client = MongoClient()
+
+uri = "mongodb://"+config.MONGO_USER+":"+config.MONGO_PASSWORD+"@ds115022.mlab.com:15022/expense-tracker"
+client = MongoClient(uri)
+db = client.get_default_database()
 
 @app.route('/')  # GET route
 def hello_world():
+    print(db)
     return 'Hello world'
 
 
