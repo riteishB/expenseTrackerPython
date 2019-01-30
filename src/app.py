@@ -12,27 +12,36 @@ app = Flask(__name__)
 
 client = MongoClient()
 
-uri = "mongodb://"+config.MONGO_USER+":"+config.MONGO_PASSWORD+"@ds115022.mlab.com:15022/expense-tracker"
+uri = "mongodb://" + config.MONGO_USER + ":" + \
+    config.MONGO_PASSWORD + "@ds115022.mlab.com:15022/expense-tracker"
 client = MongoClient(uri)
-db = client.get_default_database()
+db = client['expense-tracker']
+collection = db['expenses']
+
 
 @app.route('/')  # GET route
 def hello_world():
-    print(db)
     return 'Hello world'
 
 
 @app.route('/', methods=['POST'])
 def postHandler():
-
     content = request.get_json()
-    #content["creation_date"] = datetime.datetime.now()
-    #content["modified_date"] = datetime.datetime.now()
     expense_schema.schema.validate(content)
-    
+
+    # if data is valid data
     if(validateExpenseData(content)):
+        # generate id
         id = generateID()
-        return id, 200
+        #  update the json data to contain the id
+        content['id'] = id
+        #  update the json data to have a creation date for the initial creation
+        content['creation_date'] = datetime.datetime.now()
+
+        # once we have the data in the form we need it, we insert it to the db collection
+        collection.insert_one(content)
+
+        return id, 201
     else:
         return 'Invalid Data', 400
 
