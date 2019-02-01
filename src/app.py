@@ -17,18 +17,17 @@ collection = mongo_client.getCollection()
 def hello_world():
     return 'Hello world'
 
+
 @app.route('/<expense_id>')
 def getHandler(expense_id):
 
-    expense = collection.find_one({"id" : expense_id})
+    expense = collection.find_one({"id": expense_id})
 
     if (expense == None):
         return 'Not found', 404
-    
+
     del expense['_id']
     return jsonify(expense)
-
-
 
 
 @app.route('/', methods=['POST'])
@@ -40,6 +39,16 @@ def postHandler():
     if(validateExpenseData(content)):
         # generate id
         id = generateID()
+
+        # check if id is already in use or not
+        data = collection.find({"id": id})
+
+        # Until an unique id is found, keep creating new id
+        # data.count returns count for data -- built in syntax for count
+        while(data.count() > 0):
+            id = generateID()
+            data = collection.find({'id': id})
+
         #  update the json data to contain the id
         content['id'] = id
         #  update the json data to have a creation date for the initial creation
