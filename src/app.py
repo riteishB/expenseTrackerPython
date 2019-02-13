@@ -4,6 +4,7 @@ import random as rand
 import string
 import datetime
 from flask import jsonify
+import json
 
 from libs import mongo_client
 from schemas import expense_schema
@@ -61,6 +62,22 @@ def postHandler():
     else:
         return 'Invalid Data', 400
 
+
+@app.route('/<expense_id>', methods=['PUT'])  
+def putHandler(expense_id):
+    #  get the data from the body and  validate the schema
+    content = request.get_json()
+    
+    #  if the document in the body is valid
+    if(validateExpenseData(content)):
+        content['modified_date'] = datetime.datetime.now()
+        response = collection.update_one({"id": expense_id}, { "$set": content })
+        if(response.modified_count == 0):
+            return 'Expense not found', 400
+            
+        return 'OK', 200
+    else:
+        return 'Invalid Data', 400
 
 def generateID():
     return ''.join(rand.choice(string.ascii_uppercase + string.digits) for _ in range(6))
