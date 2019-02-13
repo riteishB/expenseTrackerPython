@@ -14,9 +14,34 @@ app = Flask(__name__)
 collection = mongo_client.getCollection()
 
 
-@app.route('/')  # GET route
-def hello_world():
-    return 'Hello world'
+#@app.route('/')  # GET route
+# def hello_world():
+#     return 'Hello world'
+
+@app.route('/')
+def get_expenses():
+    expenses = []
+    for expense in collection.find():
+        del expense['_id']
+
+        expenses.append(expense)
+
+    return jsonify(expenses)
+
+
+
+@app.route('/<expense_id>')
+def getHandler(expense_id):
+
+    expense = collection.find_one({"id" : expense_id})
+
+    if (expense == None):
+        return 'Not found', 404
+    
+    del expense['_id']
+    return jsonify(expense)
+
+
 
 
 @app.route('/<expense_id>')
