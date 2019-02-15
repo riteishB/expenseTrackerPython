@@ -33,20 +33,6 @@ def get_expenses():
 @app.route('/<expense_id>')
 def getHandler(expense_id):
 
-    expense = collection.find_one({"id" : expense_id})
-
-    if (expense == None):
-        return 'Not found', 404
-    
-    del expense['_id']
-    return jsonify(expense)
-
-
-
-
-@app.route('/<expense_id>')
-def getHandler(expense_id):
-
     expense = collection.find_one({"id": expense_id})
 
     if (expense == None):
