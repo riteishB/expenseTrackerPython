@@ -1,6 +1,34 @@
 <template>
-  <div class="hello">Hello world</div>
+  <div class="header">
+  <!-- <h1> Header </h1> -->
+  <h1> {{msg}} </h1>
+  <!-- <p>{{msg}}</p> -->
+</div>
+
 </template>
+
+<style>
+/* Style the body */
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Header/Logo Title */
+.header {
+  padding: 10px;
+  text-align: left;
+  background: #089579;
+  color: white;
+  font-size: 10px;
+}
+
+
+ /* Page Content */
+.content {padding:20px;} 
+</style>
+
+
 
 <script>
 export default {
