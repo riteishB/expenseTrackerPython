@@ -1,23 +1,26 @@
 <template>
   <div id="app">
     <TitleBar msg="Welcome to ExpenseTracker"/>
+    <ExpenseViewer></ExpenseViewer>
   </div>
 </template>
 
 <script>
-import TitleBar from './components/TitleBar.vue'
+import TitleBar from "./components/TitleBar.vue";
+import ExpenseViewer from "./components/ExpenseViewer";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    TitleBar
+    TitleBar,
+    ExpenseViewer
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
