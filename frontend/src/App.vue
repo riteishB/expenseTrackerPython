@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to ExpenseTracker"/>
+    <TitleBar msg="Welcome to ExpenseTracker"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TitleBar from './components/TitleBar.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    TitleBar
   }
 }
 </script>

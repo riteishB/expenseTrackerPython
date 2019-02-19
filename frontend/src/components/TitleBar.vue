@@ -23,36 +23,18 @@ body {
   font-size: 10px;
 }
 
-
- /* Page Content */
-.content {padding:20px;} 
 </style>
 
 
+<!-- Script below is called in the template tag above, name should match the file name, and msg should be of data type intended to pass -->
+<!-- props is what we pass from a component to another component -->
 
 <script>
 export default {
-  name: "HelloWorld",
-  props: {
+  name: "TitleBar",
+  props: {         
     msg: String
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
