@@ -1,12 +1,24 @@
 <template>
-  <div class="expenseViewContainer">
-    <h2>Expenses</h2>
-    <ul id="example-1">
-      <md-list v-for="expense in expenses" v-bind:key="expense.id">
-        <md-list-item>{{expense.expense_name}}</md-list-item>
-      </md-list>
-    </ul>
-  </div>
+  <md-table
+    v-model="expenses"
+    md-sort="name"
+    md-sort-order="asc"
+    md-card
+    md-fixed-header
+    style="text-align:left"
+  >
+    <md-table-toolbar>
+      <h1 class="md-title">Expenses</h1>
+    </md-table-toolbar>
+
+    <md-table-row slot="md-table-row" slot-scope="{ item }">
+      <md-table-cell md-label="Name">{{ item.expense_name }}</md-table-cell>
+      <md-table-cell md-label="Type" md-sort-by="expense_type">{{ item.expense_type }}</md-table-cell>
+      <md-table-cell md-label="Date Created" md-sort-by="creation_date">{{ item.creation_date }}</md-table-cell>
+      <md-table-cell md-label="Date Modified" md-sort-by="modified_date">{{ item.modified_date }}</md-table-cell>
+      <md-table-cell md-label="Amount" md-sort-by="expense_amt">{{ item.expense_amt }}</md-table-cell>
+    </md-table-row>
+  </md-table>
 </template>
 
 <style>
