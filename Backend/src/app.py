@@ -4,12 +4,14 @@ import random as rand
 import string
 import datetime
 from flask import jsonify
+from flask_cors import CORS
 import json
 
 from libs import mongo_client
 from schemas import expense_schema
 
 app = Flask(__name__)
+CORS(app)
 
 collection = mongo_client.getCollection()
 
