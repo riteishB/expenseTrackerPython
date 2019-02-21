@@ -2,18 +2,21 @@
   <div id="app">
     <TitleBar msg="Welcome to ExpenseTracker"/>
     <ExpenseViewer></ExpenseViewer>
+    <InsertExpense></InsertExpense>
   </div>
 </template>
 
 <script>
 import TitleBar from "./components/TitleBar.vue";
 import ExpenseViewer from "./components/ExpenseViewer";
+import InsertExpense from "./components/InsertExpense";
 
 export default {
   name: "app",
   components: {
     TitleBar,
-    ExpenseViewer
+    ExpenseViewer,
+    InsertExpense
   }
 };
 </script>
