@@ -1,0 +1,90 @@
+<template>
+  <form novalidate class="md-layout">
+    <md-card class="md-layout-item md-size-50 md-small-size-100">
+      <md-card-header>
+        <div class="md-title">CreateExpense</div>
+      </md-card-header>
+
+      <md-card-content>
+        <div class="md-layout md-gutter">
+          <div>
+            <md-field>
+              <label for="expense_name">Expense Name</label>
+              <md-input
+                name="expense_name"
+                id="expense_name"
+                autocomplete="name for expense"
+                v-model="expense.expense_name"
+              />
+            </md-field>
+          </div>
+          <div>
+            <md-field>
+              <label for="expense_amt">Expense Amount</label>
+              <md-input
+                name="expense_amt"
+                id="expense_amt"
+                autocomplete="expense amount"
+                v-model="expense.expense_amt"
+              />
+            </md-field>
+          </div>
+          <div>
+            <md-field>
+              <label for="expense_type">Expense Type</label>
+              <md-input
+                name="expense_type"
+                id="expense_type"
+                autocomplete="name for expense"
+                v-model="expense.expense_type"
+              />
+            </md-field>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-actions>
+        <md-button class="md-primary" v-on:click="saveExpense">Save Expense</md-button>
+      </md-card-actions>
+    </md-card>
+  </form>
+</template>
+
+<style scope>
+</style>
+
+<script>
+import axios from "axios";
+import VueMaterial from "vue-material";
+import "vue-material/dist/vue-material.min.css";
+import Vue from "vue";
+Vue.use(VueMaterial);
+
+export default {
+  name: "InsertExpense",
+  data: function() {
+    return {
+      expense: {
+        expense_name: null,
+        expense_amt: null,
+        expense_type: null
+      }
+    };
+  },
+  methods: {
+    saveExpense() {
+      axios
+        .post("http://localhost:5000", this.expense)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }
+};
+</script>
+
+
+
+

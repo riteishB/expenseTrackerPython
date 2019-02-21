@@ -1,10 +1,9 @@
 <template>
   <div class="header">
-  <!-- <h1> Header </h1> -->
-  <h1> {{msg}} </h1>
-  <!-- <p>{{msg}}</p> -->
-</div>
-
+    <!-- <h1> Header </h1> -->
+    <h1>{{msg}}</h1>
+    <!-- <p>{{msg}}</p> -->
+  </div>
 </template>
 
 <style>
@@ -22,7 +21,6 @@ body {
   color: white;
   font-size: 10px;
 }
-
 </style>
 
 
@@ -32,7 +30,7 @@ body {
 <script>
 export default {
   name: "TitleBar",
-  props: {         
+  props: {
     msg: String
   }
 };
