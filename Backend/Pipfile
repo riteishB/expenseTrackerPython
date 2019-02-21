@@ -10,6 +10,7 @@ flask = "*"
 gunicorn = "*"
 schema = "*"
 pymongo = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
