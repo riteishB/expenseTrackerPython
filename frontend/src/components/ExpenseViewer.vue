@@ -18,6 +18,22 @@
       <md-table-cell md-label="Date Created" md-sort-by="creation_date">{{ item.creation_date }}</md-table-cell>
       <md-table-cell md-label="Date Modified" md-sort-by="modified_date">{{ item.modified_date }}</md-table-cell>
       <md-table-cell md-label="Amount" md-sort-by="expense_amt">{{ item.expense_amt }}</md-table-cell>
+      <md-table-cell md-label="Actions">
+        <md-menu md-direction="bottom-start">
+          <md-button md-size="medium" md-menu-trigger>
+            <md-icon>more_vert</md-icon>
+          </md-button>
+
+          <md-menu-content>
+            <md-menu-item v-on:click="deleteExpense(item.id)">
+              <md-icon>delete_outline</md-icon>Delete
+            </md-menu-item>
+            <md-menu-item v-on:click="updateExpense(item.id)">
+              <md-icon>update</md-icon>Update
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-table-cell>
     </md-table-row>
   </md-table>
 </template>
@@ -37,6 +53,7 @@ import InsertExpense from "./InsertExpense";
 import axios from "axios";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
+import "vue-material/dist/theme/default.css";
 
 import Vue from "vue";
 Vue.use(VueMaterial);
@@ -47,20 +64,45 @@ export default {
   },
   data: () => {
     return {
-      expenses: []
+      expenses: [],
+      deleteMsg: { status: "", msg: "" }
     };
   },
+  methods: {
+    showOptions() {
+      console.log("Option clicked");
+    },
+    deleteExpense(id) {
+      console.log("Deleting expense with id ", id);
+      const url = `http://localhost:5000/${id}`;
+      axios
+        .delete(url)
+        .then(response => {
+          if (response.status == 200) {
+            this.deleteMsg.status = "green";
+            this.deleteMsg.msg = "Delete Successful";
+            this.getExpenses();
+          }
+        })
+        .catch(err => {});
+    },
+    updateExpense(id) {
+      console.log("Updating expense with id ", id);
+    },
+    getExpenses() {
+      axios
+        .get("http://localhost:5000")
+        .then(response => {
+          this.expenses = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  },
   mounted() {
-    axios
-      .get("http://localhost:5000")
-      .then(response => {
-        this.expenses = response.data;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    this.getExpenses();
   }
-  //   props: {}
 };
 </script>
 
