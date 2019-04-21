@@ -52,7 +52,7 @@
 
 
 <script>
-import axios from "axios";
+import { store } from "../services/store.js";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import Vue from "vue";
@@ -71,14 +71,7 @@ export default {
   },
   methods: {
     saveExpense() {
-      axios
-        .post("http://localhost:5000", this.expense)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      store.saveExpense(this.expense);
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <md-table
-    v-model="expenses"
+    v-model="state.expenses"
     md-sort="name"
     md-sort-order="asc"
     md-card
@@ -51,6 +51,7 @@
 import insertExpenseDialog from "./insertExpenseDialog";
 import InsertExpense from "./InsertExpense";
 import axios from "axios";
+import { store } from "../services/store.js";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
@@ -64,8 +65,7 @@ export default {
   },
   data: () => {
     return {
-      expenses: [],
-      deleteMsg: { status: "", msg: "" }
+      state: store.state
     };
   },
   methods: {
@@ -73,35 +73,14 @@ export default {
       console.log("Option clicked");
     },
     deleteExpense(id) {
-      console.log("Deleting expense with id ", id);
-      const url = `http://localhost:5000/${id}`;
-      axios
-        .delete(url)
-        .then(response => {
-          if (response.status == 200) {
-            this.deleteMsg.status = "green";
-            this.deleteMsg.msg = "Delete Successful";
-            this.getExpenses();
-          }
-        })
-        .catch(err => {});
+      store.deleteExpense(id);
     },
     updateExpense(id) {
       console.log("Updating expense with id ", id);
-    },
-    getExpenses() {
-      axios
-        .get("http://localhost:5000")
-        .then(response => {
-          this.expenses = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
     }
   },
-  mounted() {
-    this.getExpenses();
+  async mounted() {
+    await store.getAllExpenses();
   }
 };
 </script>
