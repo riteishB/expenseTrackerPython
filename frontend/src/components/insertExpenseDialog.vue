@@ -1,7 +1,11 @@
 <template>
   <div>
     <md-dialog :md-active.sync="showDialog">
-      <md-button class="md-primary" @click="showDialog = false">
+      <md-button
+        class="md-primary"
+        @click="showDialog = false"
+        style="width: 20px;margin-left: 95%;"
+      >
         <md-icon>close</md-icon>
       </md-button>
       <InsertExpense></InsertExpense>
