@@ -42,8 +42,7 @@ def getHandler(expense_id):
 
     del expense['_id']
     return jsonify(expense)
-
-
+    
 @app.route('/', methods=['POST'])
 def postHandler():
     content = request.get_json()
