@@ -47,7 +47,7 @@ def getHandler(expense_id):
 @app.route('/<expense_id>', methods=['DELETE'])
 def deleteHandler(expense_id):
     deletedCount = collection.delete_one({"id" : expense_id})
-    if(deletedCount == 1):
+    if(deletedCount.deleted_count == 1):
         return ('Delete successful', 200)
     else:
         return('ID not found', 404)
