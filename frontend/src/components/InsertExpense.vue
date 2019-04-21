@@ -7,7 +7,7 @@
 
       <md-card-content>
         <div class="md-layout md-gutter">
-          <div>
+          <div class="input-container">
             <md-field>
               <label for="expense_name">Expense Name</label>
               <md-input
@@ -18,7 +18,7 @@
               />
             </md-field>
           </div>
-          <div>
+          <div class="input-container">
             <md-field>
               <label for="expense_amt">Expense Amount</label>
               <md-input
@@ -29,7 +29,7 @@
               />
             </md-field>
           </div>
-          <div>
+          <div class="input-container">
             <md-field>
               <label for="expense_type">Expense Type</label>
               <md-input
@@ -49,8 +49,7 @@
   </form>
 </template>
 
-<style scope>
-</style>
+
 
 <script>
 import axios from "axios";
@@ -85,6 +84,12 @@ export default {
 };
 </script>
 
+<style scope>
+.input-container {
+  width: 100%;
+  padding: 20px;
+}
+</style>
 
 
 
