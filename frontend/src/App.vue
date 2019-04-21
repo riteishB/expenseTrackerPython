@@ -2,7 +2,6 @@
   <div id="app">
     <TitleBar msg="Welcome to ExpenseTracker"/>
     <ExpenseViewer></ExpenseViewer>
-    <insertExpenseDialog></insertExpenseDialog>
   </div>
 </template>
 

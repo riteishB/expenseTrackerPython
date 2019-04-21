@@ -9,6 +9,7 @@
   >
     <md-table-toolbar>
       <h1 class="md-title">Expenses</h1>
+      <insertExpenseDialog></insertExpenseDialog>
     </md-table-toolbar>
 
     <md-table-row slot="md-table-row" slot-scope="{ item }">
@@ -31,6 +32,8 @@
 </style>
 
 <script>
+import insertExpenseDialog from "./insertExpenseDialog";
+import InsertExpense from "./InsertExpense";
 import axios from "axios";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
@@ -39,6 +42,9 @@ import Vue from "vue";
 Vue.use(VueMaterial);
 export default {
   name: "ExpenseViewer",
+  components: {
+    insertExpenseDialog
+  },
   data: () => {
     return {
       expenses: []
