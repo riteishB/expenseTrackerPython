@@ -42,6 +42,17 @@ def getHandler(expense_id):
 
     del expense['_id']
     return jsonify(expense)
+
+
+@app.route('/<expense_id>', methods=['DELETE'])
+def deleteHandler(expense_id):
+    deletedCount = collection.delete_one({"id" : expense_id})
+    if(deletedCount == 1):
+        return ('Delete successful', 200)
+    else:
+        return('ID not found', 404)
+   
+        
     
 @app.route('/', methods=['POST'])
 def postHandler():
