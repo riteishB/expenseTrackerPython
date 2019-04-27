@@ -74,11 +74,9 @@ export default {
   },
   methods: {
     async saveExpense() {
-      try {
-        await store.saveExpense(this.expense);
+      await store.saveExpense(this.expense);
+      if (store.getError("saveExpense") === null) {
         this.$emit("update:showDialog", false);
-      } catch (err) {
-        console.log(err);
       }
     }
   }
