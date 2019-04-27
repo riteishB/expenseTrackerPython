@@ -60,6 +60,9 @@ Vue.use(VueMaterial);
 
 export default {
   name: "InsertExpense",
+  props: {
+    showDialog: true
+  },
   data: function() {
     return {
       expense: {
@@ -70,8 +73,13 @@ export default {
     };
   },
   methods: {
-    saveExpense() {
-      store.saveExpense(this.expense);
+    async saveExpense() {
+      try {
+        await store.saveExpense(this.expense);
+        this.$emit("update:showDialog", false);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };
