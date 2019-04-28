@@ -1,14 +1,10 @@
 <template>
   <div>
     <md-dialog :md-active.sync="showDialog">
-      <md-button
-        class="md-primary"
-        @click="showDialog = false"
-        style="width: 20px;margin-left: 95%;"
-      >
+      <md-button class="md-primary" @click="showDialog = false" style="width: 20px">
         <md-icon>close</md-icon>
       </md-button>
-      <InsertExpense></InsertExpense>
+      <InsertExpense v-bind:showDialog.sync="showDialog"></InsertExpense>
     </md-dialog>
 
     <md-button class="md-primary md-raised" @click="showDialog = true">Add Expenses</md-button>
