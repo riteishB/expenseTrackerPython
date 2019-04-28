@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 
 WORKDIR /app/src
 
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:5000"]
+CMD gunicorn app:app --bind 0.0.0.0:$PORT
