@@ -3,7 +3,7 @@ import config
 
 client = MongoClient()
 uri = "mongodb://" + config.MONGO_USER + ":" + \
-    config.MONGO_PASSWORD + "@ds115022.mlab.com:15022/expense-tracker"
+    config.MONGO_PASSWORD + "@ds115022.mlab.com:15022/expense-tracker?retryWrites=false"
 client = MongoClient(uri)
 db = client['expense-tracker']
 collection = db['expenses']
